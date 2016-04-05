@@ -7,6 +7,11 @@ public class ReplaySystem : MonoBehaviour {
 	private MyKeyFrame[] keyFrames = new MyKeyFrame [bufferFrames];
 
 	private Rigidbody rb;
+	private GameManager gm;
+
+	void Awake () {
+		gm = GameObject.FindObjectOfType<GameManager>();
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -15,7 +20,10 @@ public class ReplaySystem : MonoBehaviour {
 		
 	// Update is called once per frame
 	void Update () {
-		Record ();
+		if (gm.recording) {
+			Record ();
+		}
+		else PlayBack ();
 	}
 
 	void PlayBack () {
